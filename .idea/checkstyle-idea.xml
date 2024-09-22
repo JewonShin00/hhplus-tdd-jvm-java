@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
+<<<<<<< HEAD
     <checkstyleVersion>10.18.1</checkstyleVersion>
     <scanScope>AllSourcesWithTests</scanScope>
     <suppressErrors>true</suppressErrors>
@@ -9,10 +10,17 @@
     <option name="activeLocationIds">
       <option value="116ba38b-5fed-4ba2-bd3f-b8f87882bdb1" />
     </option>
+=======
+    <checkstyleVersion>10.14.0</checkstyleVersion>
+    <scanScope>JavaOnly</scanScope>
+    <option name="thirdPartyClasspath" />
+    <option name="activeLocationIds" />
+>>>>>>> c8234d3 (Add project files in submodule)
     <option name="locations">
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
+<<<<<<< HEAD
         <ConfigurationLocation id="116ba38b-5fed-4ba2-bd3f-b8f87882bdb1" type="LOCAL_FILE" scope="All" description="Naver Checkstyle Rules">
           $USER_HOME$/Downloads/naver-checkstyle-rules.xml
           <option name="properties">
@@ -21,6 +29,8 @@
             </map>
           </option>
         </ConfigurationLocation>
+=======
+>>>>>>> c8234d3 (Add project files in submodule)
       </list>
     </option>
   </component>

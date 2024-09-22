@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 # 디폴트 무시된 파일
 /shelf/
 /workspace.xml
 # 에디터 기반 HTTP 클라이언트 요청
+=======
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+>>>>>>> c8234d3 (Add project files in submodule)
 /httpRequests/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+<<<<<<< HEAD
+=======
+# GitHub Copilot persisted chat sessions
+/copilot/chatSessions
+>>>>>>> c8234d3 (Add project files in submodule)
