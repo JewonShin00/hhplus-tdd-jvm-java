@@ -1,0 +1,3 @@
+[submodule "hhplus-tdd-java"]
+	path = hhplus-tdd-java
+	url = https://github.com/JewonShin00/hhplus-tdd-jvm-java.git
