@@ -1,16 +1,11 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class PointControllerTest {
+public class PointServiceTest {
 
-	// 특정 유저의 포인트를 조회하는 기능 테스트
+	@DisplayName("특정 유저의 포인트를 조회하는 기능 테스트")
 	@Test
 	void testPoint() {
-
-		// given
-
-		// when
-
-		// then
 
 	}
 
