@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PointController {
 
 	private static final Logger log = LoggerFactory.getLogger(PointController.class);
+	private final PointService pointService;
+
+	public PointController(PointService pointService) {
+		this.pointService = pointService;
+	}
 
 	/**
 	 * TODO - 특정 유저의 포인트를 조회하는 기능을 작성해주세요.
@@ -24,7 +29,8 @@ public class PointController {
 	public UserPoint point(
 		@PathVariable long id
 	) {
-		return new UserPoint(0, 0, 0);
+		log.info("포인트 조회 요청 - 유저 ID: {}", id);
+		return pointService.getPoint(id);  // 서비스 호출하여 포인트 조회
 	}
 
 	/**
@@ -34,7 +40,8 @@ public class PointController {
 	public List<PointHistory> history(
 		@PathVariable long id
 	) {
-		return List.of();
+		log.info("포인트 내역 조회 요청 - 유저 ID: {}", id);
+		return pointService.getPointHistories(id);  // 서비스 호출하여 포인트 내역 조회
 	}
 
 	/**
@@ -45,7 +52,8 @@ public class PointController {
 		@PathVariable long id,
 		@RequestBody long amount
 	) {
-		return new UserPoint(0, 0, 0);
+		log.info("포인트 충전 요청 - 유저 ID: {}, 충전 금액: {}", id, amount);
+		return pointService.chargePoint(id, amount);  // 서비스 호출하여 포인트 충전
 	}
 
 	/**
@@ -56,6 +64,7 @@ public class PointController {
 		@PathVariable long id,
 		@RequestBody long amount
 	) {
-		return new UserPoint(0, 0, 0);
+		log.info("포인트 사용 요청 - 유저 ID: {}, 사용 금액: {}", id, amount);
+		return pointService.usePoint(id, amount);  // 서비스 호출하여 포인트 사용
 	}
 }
