@@ -3,6 +3,9 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -181,5 +184,37 @@ public class PointServiceTest {
 
 		// 포인트 사용 시 잔고 부족으로 예외가 발생해야 함
 		assertThrows(IllegalArgumentException.class, () -> pointService.usePoint(userId, useAmount));
+	}
+
+	@DisplayName("특정 유저의 포인트를 사용하는 기능 테스트_동시성")
+	@Test
+	void testSynchroUse() throws InterruptedException {
+		//모킹된 객체는 상태를 유지하지 않기 때문에 동시성 테스트에서는 적합하지 않다고 함
+		UserPointTable realUserPointTable = new UserPointTable();
+		PointService pointService = new PointService(realUserPointTable, pointHistoryService);
+
+		// given - 초기 포인트 설정
+		long userId = 1L;
+		long initialPoints = 500L;
+		long useAmount = 100L;
+		int threadCount = 5; // 스레드의 수는 5개
+
+		// 유저 포인트 초기화 (test 실행 전에 반드시 초기 데이터 설정)
+		realUserPointTable.insertOrUpdate(userId, initialPoints);
+
+		// when - 스레드를 통해 포인트를 차감하는 작업 수행
+		ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+		for (int i = 0; i < threadCount; i++) {
+			executorService.execute(() -> {
+				pointService.usePoint(userId, useAmount);
+			});
+		}
+
+		executorService.shutdown();
+		executorService.awaitTermination(30, TimeUnit.SECONDS); // 모든 스레드가 작업을 끝낼 때까지 대기
+
+		// then - 최종 포인트가 정확히 차감되었는지 검증
+		UserPoint finalPoint = realUserPointTable.selectById(userId); // 최종 포인트 확인
+		assertEquals(0L, finalPoint.point(), "모든 포인트가 정상적으로 차감되었는지 확인");
 	}
 }
